@@ -1,5 +1,5 @@
 # First stage builds the application
-FROM registry.access.redhat.com/ubi8/nodejs-16:1 as builder
+FROM registry.access.redhat.com/ubi8/nodejs-16:1-90 as builder
 
 # Add dependencies
 COPY --chown=1001:1001 package*.json $HOME/
@@ -15,7 +15,7 @@ RUN npm run build && \
     npm prune --production
 
 # Second stage copies the application to the minimal image
-FROM registry.access.redhat.com/ubi8/nodejs-16-minimal:1
+FROM registry.access.redhat.com/ubi8/nodejs-16-minimal:1-98
 
 # ENV variables
 # API_BASE_URL: URL of service to connect to
